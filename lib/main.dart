@@ -40,6 +40,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color color = Theme.of(context).primaryColor;
+
+    Widget buttonSection = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        _buildButtonColumn(color, Icons.call, 'CALL'),
+        _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
+        _buildButtonColumn(color, Icons.share, 'SHARE'),
+      ],
+    );
+
     return MaterialApp(
       title: 'FlutterApp',
       home: Scaffold(
@@ -49,7 +60,7 @@ class MyApp extends StatelessWidget {
         body: Column(
           children: <Widget>[
             titleSection,
-            _buildButtonColumn(Colors.red, Icons.call, 'CALL'),
+            buttonSection,
           ],
         ),
       ),
