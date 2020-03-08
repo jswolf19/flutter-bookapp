@@ -9,6 +9,7 @@ class BookPage extends StatefulWidget {
 
 class _BookPageState extends State<BookPage> {
   String text = 'loading';
+  List<String> books = List();
 
   @override
   void initState() {
@@ -26,6 +27,7 @@ class _BookPageState extends State<BookPage> {
     for(int i = 0; i < items.length; i++) {
       Map item = items[i];
       print(item["volumeInfo"]["title"]);
+      books.add(item["volumeInfo"]["title"]);
     }
 
     setState(() {
