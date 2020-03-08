@@ -6,8 +6,23 @@ class BookmarkWidget extends StatefulWidget {
 }
 
 class _BookmarkWidgetState extends State<BookmarkWidget> {
+  bool isSelected = false;
+
+  void onPressed() {
+    setState(() {
+      isSelected = !isSelected;
+    });
+  }
+
+  IconData getIconData() {
+    return isSelected ? Icons.bookmark : Icons.bookmark_border;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Icon(Icons.bookmark_border);
+    return IconButton(
+      icon: Icon(getIconData()),
+      onPressed: onPressed,
+    );
   }
 }
