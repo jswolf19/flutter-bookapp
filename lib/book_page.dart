@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'book.dart';
 
 class BookPage extends StatefulWidget {
   @override
@@ -8,7 +9,7 @@ class BookPage extends StatefulWidget {
 }
 
 class _BookPageState extends State<BookPage> {
-  List<String> books = List();
+  List<Book> books = List();
 
   @override
   void initState() {
@@ -26,7 +27,14 @@ class _BookPageState extends State<BookPage> {
     for(int i = 0; i < items.length; i++) {
       Map item = items[i];
       print(item["volumeInfo"]["title"]);
-      books.add(item["volumeInfo"]["title"]);
+      try {
+        books.add(Book(
+          title: item["volumeInfo"]["title"],
+          imageUrl: item["volumeInfo"]["imageLinks"]["thumbnail"],
+        ));
+      } catch(error) {
+        print(error);
+      }
     }
 
     setState(() {});
@@ -53,8 +61,16 @@ class _BookPageState extends State<BookPage> {
 
   List<Widget> _buildBooks() {
     List<Widget> bookWidgets = List();
-    for(String book in books) {
-      bookWidgets.add(Text(book));
+    for(Book book in books) {
+      bookWidgets.add(Column(
+        children: <Widget>[
+          SizedBox(
+            width: 120,
+            child: Image.network(book.imageUrl),
+          ),
+          Text(book.title)
+        ],
+      ));
     }
     return bookWidgets;
   }
