@@ -8,6 +8,10 @@ class BookPage extends StatefulWidget {
 class _BookPageState extends State<BookPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar:  AppBar(
+        title: Text('Book App'),
+      ),
+    );
   }
 }
