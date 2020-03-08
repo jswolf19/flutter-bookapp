@@ -8,7 +8,6 @@ class BookPage extends StatefulWidget {
 }
 
 class _BookPageState extends State<BookPage> {
-  String text = 'loading';
   List<String> books = List();
 
   @override
@@ -30,18 +29,33 @@ class _BookPageState extends State<BookPage> {
       books.add(item["volumeInfo"]["title"]);
     }
 
-    setState(() {
-      text = items[0].toString();
-    });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget body;
+    if(books.length == 0) {
+      body = Text('loading');
+    } else {
+      body = ListView(
+          children: _buildBooks(),
+      );
+    }
+
     return Scaffold(
       appBar:  AppBar(
         title: Text('Book App'),
       ),
-      body: Text(text),
+      body: body,
     );
+  }
+
+  List<Widget> _buildBooks() {
+    List<Widget> bookWidgets = List();
+    for(String book in books) {
+      bookWidgets.add(Text(book));
+    }
+    return bookWidgets;
   }
 }
