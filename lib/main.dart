@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
               width: 100,
               height: 100,
               color: Colors.blue,
-              child: Image.network('https://picsum.photos/id/237/200/300'),
+              child: Image.network('https://picsum.photos/id/237/200/300', fit: BoxFit.cover),
             ),
             Container(
               width: 100,
