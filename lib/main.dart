@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
           title: Text('Welcome to Flutter'),
         ),
         body: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             Container(
               width: 100,
