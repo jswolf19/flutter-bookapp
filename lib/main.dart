@@ -11,8 +11,10 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Welcome to Flutter'),
         ),
-        body: Center(
-          child: Text('Hello World'),
+        body: Container(
+          width: 300,
+          height: 300,
+          color: Colors.green,
         ),
       ),
     );
