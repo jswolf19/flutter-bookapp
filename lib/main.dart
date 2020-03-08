@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'bookmark_widget.dart';
 import 'favorite_widget.dart';
 
@@ -132,7 +134,13 @@ class MyApp extends StatelessWidget {
           Expanded(
             child: Container(
               margin: EdgeInsets.only(left: 10),
-              child: Text(detailText),
+              child: Linkify(
+                text: detailText,
+                onOpen: (link) {
+                  launch(link.text);
+                },
+                options: LinkifyOptions(humanize: false),
+              ),
             ),
           )
         ],
