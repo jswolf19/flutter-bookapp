@@ -17,11 +17,7 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
   }
 
   IconData starIconData() {
-    if (isSelected) {
-      return Icons.star;
-    } else {
-      return Icons.star_border;
-    }
+    return isSelected ? Icons.star : Icons.star_border;
   }
 
   @override
