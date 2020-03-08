@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Welcome to Flutter'),
         ),
-        body: Column(
+        body: Row(
           children: <Widget>[
             Container(
               width: 100,
