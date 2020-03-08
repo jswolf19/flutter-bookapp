@@ -46,7 +46,7 @@ class _BookPageState extends State<BookPage> {
     if(books.length == 0) {
       body = Text('loading');
     } else {
-      body = ListView(
+      body = Wrap(
           children: _buildBooks(),
       );
     }
@@ -60,16 +60,22 @@ class _BookPageState extends State<BookPage> {
   }
 
   List<Widget> _buildBooks() {
+    final contentWidth = MediaQuery.of(context).size.width / 2;
     List<Widget> bookWidgets = List();
+
     for(Book book in books) {
-      bookWidgets.add(Column(
-        children: <Widget>[
-          SizedBox(
-            width: 120,
-            child: Image.network(book.imageUrl),
-          ),
-          Text(book.title)
-        ],
+      bookWidgets.add(Container(
+        padding: EdgeInsets.all(8),
+        width: contentWidth,
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              width: 120,
+              child: Image.network(book.imageUrl),
+            ),
+            Text(book.title)
+          ],
+        ),
       ));
     }
     return bookWidgets;
