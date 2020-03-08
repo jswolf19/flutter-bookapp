@@ -23,6 +23,11 @@ class _BookPageState extends State<BookPage> {
     Map result = json.decode(body);
     List items = result["items"];
 
+    for(int i = 0; i < items.length; i++) {
+      Map item = items[i];
+      print(item["volumeInfo"]["title"]);
+    }
+
     setState(() {
       text = items[0].toString();
     });
