@@ -70,6 +70,9 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Welcome to Flutter'),
+          actions: <Widget>[
+            Icon(Icons.bookmark_border),
+          ],
         ),
         body: ListView(
           children: <Widget>[
