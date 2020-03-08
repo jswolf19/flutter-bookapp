@@ -46,8 +46,10 @@ class _BookPageState extends State<BookPage> {
     if(books.length == 0) {
       body = Text('loading');
     } else {
-      body = Wrap(
-          children: _buildBooks(),
+      body = SingleChildScrollView(
+        child: Wrap(
+            children: _buildBooks(),
+        ),
       );
     }
 
