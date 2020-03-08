@@ -3,6 +3,41 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  Widget titleSection = Container(
+    padding: EdgeInsets.all(32),
+    child: Row(
+      children: <Widget>[
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.only(bottom: 8),
+                child: Text(
+                  'Oeschinen Lake Campground',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Text(
+                'Kandersteg, Switzerland',
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Icon(
+          Icons.star,
+          color: Colors.red,
+        ),
+        Text('41'),
+      ],
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,27 +46,9 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Welcome to Flutter'),
         ),
-        body: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        body: Column(
           children: <Widget>[
-            Container(
-              width: 100,
-              height: 100,
-              color: Colors.blue,
-              child: Image.network('https://picsum.photos/id/237/200/300', fit: BoxFit.cover),
-            ),
-            Container(
-              width: 100,
-              height: 100,
-              color: Colors.red,
-            ),
-            Expanded(
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.yellow,
-              ),
-            )
+            titleSection
           ],
         ),
       ),
