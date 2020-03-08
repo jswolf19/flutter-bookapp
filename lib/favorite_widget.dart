@@ -6,17 +6,35 @@ class FavoriteWidget extends StatefulWidget {
 }
 
 class _FavoriteWidgetState extends State<FavoriteWidget> {
+  int count = 41;
+  bool isSelected = false;
+
+  void onPressed() {
+    setState(() {
+      count = count + 1;
+      isSelected = true;
+    });
+  }
+
+  IconData starIconData() {
+    if (isSelected) {
+      return Icons.star;
+    } else {
+      return Icons.star_border;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Text('41'),
+        Text('$count'),
         IconButton(
           icon: Icon(
-            Icons.star_border,
+            starIconData(),
             color: Colors.red,
           ),
-          onPressed: null,
+          onPressed: onPressed,
         ),
       ],
     );
