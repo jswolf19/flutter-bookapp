@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class BookPage extends StatefulWidget {
   @override
@@ -18,8 +19,11 @@ class _BookPageState extends State<BookPage> {
 
   void requestSearchBooks() async {
     final response = await http.get('https://www.googleapis.com/books/v1/volumes/?q=factfulness');
+    final body = response.body;
+    Map result = json.decode(body);
+
     setState(() {
-      text = response.body;
+      text = result["totalItems"].toString();
     });
   }
 
