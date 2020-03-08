@@ -29,11 +29,15 @@ class MyApp extends StatelessWidget {
             ],
           ),
         ),
-        Icon(
-          Icons.star,
-          color: Colors.red,
+        Column(
+          children: <Widget>[
+            Text('41'),
+            Icon(
+              Icons.star,
+              color: Colors.red,
+            ),
+          ],
         ),
-        Text('41'),
       ],
     ),
   );
