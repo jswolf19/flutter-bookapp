@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'book.dart';
+import 'book_card.dart';
 
 class BookPage extends StatefulWidget {
   @override
@@ -62,23 +63,10 @@ class _BookPageState extends State<BookPage> {
   }
 
   List<Widget> _buildBooks() {
-    final contentWidth = MediaQuery.of(context).size.width / 2;
     List<Widget> bookWidgets = List();
 
     for(Book book in books) {
-      bookWidgets.add(Container(
-        padding: EdgeInsets.all(8),
-        width: contentWidth,
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              width: 120,
-              child: Image.network(book.imageUrl),
-            ),
-            Text(book.title)
-          ],
-        ),
-      ));
+      bookWidgets.add(BookCard(book));
     }
     return bookWidgets;
   }
