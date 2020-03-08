@@ -11,8 +11,13 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
 
   void onPressed() {
     setState(() {
-      count = count + 1;
-      isSelected = true;
+      if(isSelected) {
+        count-= 1;
+        isSelected = false;
+      } else {
+        count+= 1;
+        isSelected = true;
+      }
     });
   }
 
