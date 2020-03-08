@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'bookmark_widget.dart';
 import 'favorite_widget.dart';
 
 void main() => runApp(MyApp());
@@ -80,7 +81,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Welcome to Flutter'),
           actions: <Widget>[
-            Icon(Icons.bookmark_border),
+            BookmarkWidget(),
           ],
         ),
         body: ListView(
