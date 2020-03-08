@@ -47,11 +47,11 @@ class MyApp extends StatelessWidget {
     padding: EdgeInsets.all(32),
     child: Text(
       'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-          'Alps. Situated 1,578 meters above sea level, it is one of the '
-          'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-          'half-hour walk through pastures and pine forest, leads you to the '
-          'lake, which warms to 20 degrees Celsius in the summer. Activities '
-          'enjoyed here include rowing, and riding the summer toboggan run.',
+      'Alps. Situated 1,578 meters above sea level, it is one of the '
+      'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
+      'half-hour walk through pastures and pine forest, leads you to the '
+      'lake, which warms to 20 degrees Celsius in the summer. Activities '
+      'enjoyed here include rowing, and riding the summer toboggan run.',
       softWrap: true,
     ),
   );
@@ -67,6 +67,18 @@ class MyApp extends StatelessWidget {
         _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
         _buildButtonColumn(color, Icons.share, 'SHARE'),
       ],
+    );
+
+    Widget detailSection = Container(
+      margin: EdgeInsets.only(left: 32),
+      child: Column(
+        children: <Widget>[
+          _buildDetail(Icons.place, 'Kandersteg 3718, Switzerland'),
+          _buildDetail(Icons.local_offer, 'Nature & Parks, Bodies of Water'),
+          _buildDetail(Icons.access_time, 'Suggested Duration:More than 3 hours'),
+          _buildDetail(Icons.open_in_browser, 'https://www.tripadvisor.com/Attraction_Review-g198863-d3443081-Reviews-Oeschinen_Lake-Kandersteg_Canton_of_Bern.html'),
+        ],
+      ),
     );
 
     return MaterialApp(
@@ -89,6 +101,7 @@ class MyApp extends StatelessWidget {
             titleSection,
             buttonSection,
             textSection,
+            detailSection,
           ],
         ),
       ),
@@ -114,4 +127,22 @@ class MyApp extends StatelessWidget {
         ),
       ],
     );
-  }}
+  }
+
+  Widget _buildDetail(IconData icon, String detailText) {
+    return Container(
+      margin: EdgeInsets.only(top: 10),
+      child: Row(
+        children: <Widget>[
+          Icon(icon),
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.only(left: 10),
+              child: Text(detailText),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
