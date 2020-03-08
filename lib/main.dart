@@ -48,10 +48,31 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: <Widget>[
-            titleSection
+            titleSection,
+            _buildButtonColumn(Colors.red, Icons.call, 'CALL'),
           ],
         ),
       ),
     );
   }
-}
+
+  Column _buildButtonColumn(Color color, IconData icon, String label) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Icon(icon, color: color),
+        Container(
+          margin: EdgeInsets.only(top: 8),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: color,
+            ),
+          ),
+        ),
+      ],
+    );
+  }}
