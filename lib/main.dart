@@ -11,10 +11,24 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Welcome to Flutter'),
         ),
-        body: Container(
-          width: 300,
-          height: 300,
-          color: Colors.green,
+        body: Column(
+          children: <Widget>[
+            Container(
+              width: 100,
+              height: 100,
+              color: Colors.blue,
+            ),
+            Container(
+              width: 100,
+              height: 100,
+              color: Colors.red,
+            ),
+            Container(
+              width: 100,
+              height: 100,
+              color: Colors.yellow,
+            )
+          ],
         ),
       ),
     );
