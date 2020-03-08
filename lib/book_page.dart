@@ -21,9 +21,10 @@ class _BookPageState extends State<BookPage> {
     final response = await http.get('https://www.googleapis.com/books/v1/volumes/?q=factfulness');
     final body = response.body;
     Map result = json.decode(body);
+    List items = result["items"];
 
     setState(() {
-      text = result["totalItems"].toString();
+      text = items[0].toString();
     });
   }
 
