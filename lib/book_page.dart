@@ -29,9 +29,11 @@ class _BookPageState extends State<BookPage> {
       Map item = items[i];
       print(item["volumeInfo"]["title"]);
       try {
+        List identifiers = item["volumeInfo"]["industryIdentifiers"];
         books.add(Book(
           title: item["volumeInfo"]["title"],
           imageUrl: item["volumeInfo"]["imageLinks"]["thumbnail"],
+          isbn: identifiers.firstWhere((i) => i["type"] == "ISBN_13")["identifier"]
         ));
       } catch(error) {
         print(error);
