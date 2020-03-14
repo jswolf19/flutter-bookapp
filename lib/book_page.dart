@@ -1,8 +1,12 @@
+import 'package:bookapp/calil_connection.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'book.dart';
 import 'book_card.dart';
+import 'secrets.dart' as secrets;
+
+const _calilSystemId = 'Gifu_Minokamo';
 
 class BookPage extends StatefulWidget {
   @override
@@ -67,8 +71,16 @@ class _BookPageState extends State<BookPage> {
   List<Widget> _buildBooks() {
     List<Widget> bookWidgets = List();
 
+    final CalilConnection conn = CalilConnection(
+      appKey: secrets.getCalilAppKey(),
+      systemId: _calilSystemId,
+    );
+
     for(Book book in books) {
-      bookWidgets.add(BookCard(book));
+      bookWidgets.add(BookCard(
+        book: book,
+        conn: conn,
+      ));
     }
     return bookWidgets;
   }
