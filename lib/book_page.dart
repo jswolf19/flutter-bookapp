@@ -24,7 +24,7 @@ class _BookPageState extends State<BookPage> {
   }
 
   void requestSearchBooks() async {
-    final response = await http.get('https://www.googleapis.com/books/v1/volumes/?q=factfulness');
+    final response = await http.get('https://www.googleapis.com/books/v1/volumes/?q=かがみの孤城');
     final body = response.body;
     Map result = json.decode(body);
     List items = result["items"];
