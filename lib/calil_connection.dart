@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bookapp/library_status.dart';
 import 'package:http/http.dart' as http;
 import 'book.dart';
 
@@ -12,7 +13,7 @@ class CalilConnection {
       : _appKey = appKey,
         _pollInterval = Duration(seconds: 2);
 
-  void check(Book book) async {
+  Future<Iterable<LibraryStatus>> check(Book book) async {
     Map result = await _firstRequest(book.isbn);
     while(result["continue"] == 1) {
       print("retry");
@@ -20,6 +21,12 @@ class CalilConnection {
       result = await _continueRequest(result["session"]);
     }
     print("finish");
+
+    Map status = result["books"][book.isbn][systemId]["libkey"];
+    return status.entries.map((e) => LibraryStatus(
+      library: e.key,
+      status: e.value,
+    ));
   }
 
   Future<Map> _firstRequest(String isbn) async {
