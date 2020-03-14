@@ -22,10 +22,14 @@ class _BookCardState extends State<BookCard> {
 
   @override
   Widget build(BuildContext context) {
-    final contentWidth = MediaQuery.of(context).size.width / 2;
+    final contentWidth = (MediaQuery.of(context).size.width / 2) - 8;
 
     return Container(
-      padding: EdgeInsets.all(8),
+      margin: EdgeInsets.all(4),
+      padding: EdgeInsets.all(4),
+      decoration: BoxDecoration(
+          border: Border.all()
+      ),
       width: contentWidth,
       child: Column(
         children: <Widget>[
@@ -54,7 +58,11 @@ class _BookCardState extends State<BookCard> {
   Widget _buildLibraryStatus(LibraryStatus status) {
     return Row(
       children: <Widget>[
-        Text(status.library),
+        Container(
+          padding: EdgeInsets.only(left: 10),
+          width: 100,
+          child: Text(status.library)
+        ),
         Text(status.status),
       ],
     );
