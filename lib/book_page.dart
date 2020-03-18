@@ -14,34 +14,24 @@ class BookPage extends StatefulWidget {
 
 class _BookPageState extends State<BookPage> {
   List<Book> books = List();
+  TextEditingController _controller = TextEditingController();
+  FocusNode _focusNode = FocusNode();
 
   @override
-  void initState() {
-    super.initState();
-
-    GoogleBookConnection conn = GoogleBookConnection();
-    conn.requestSearchBooks('かがみの孤城').then((results) {
-      setState(() {
-        books = results;
-      });
-    });
+  void dispose() {
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget body;
+    Widget results;
     if(books.length == 0) {
-      body = Text('loading');
+      results = Text('loading');
     } else {
-      body = SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _buildTextField(),
-            Wrap(
-                children: _buildBooks(),
-            ),
-          ],
-        ),
+      results = Wrap(
+        children: _buildBooks(),
       );
     }
 
@@ -49,7 +39,14 @@ class _BookPageState extends State<BookPage> {
       appBar:  AppBar(
         title: Text('Book App'),
       ),
-      body: body,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            _buildTextField(),
+            results,
+          ],
+        ),
+      ),
     );
   }
 
@@ -59,15 +56,28 @@ class _BookPageState extends State<BookPage> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: TextField(),
+            child: TextField(
+              controller: _controller,
+              focusNode: _focusNode,
+            ),
           ),
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: null,
+            onPressed: _onPressed,
           )
         ],
       )
     );
+  }
+
+  void _onPressed() async {
+    _focusNode.unfocus();
+
+    GoogleBookConnection conn = GoogleBookConnection();
+    List<Book> results = await conn.requestSearchBooks(_controller.text);
+    setState(() {
+      books = results;
+    });
   }
 
   List<Widget> _buildBooks() {
