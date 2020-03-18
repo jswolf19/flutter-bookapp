@@ -11,7 +11,7 @@ class GoogleBookConnection {
     List items = result["items"];
 
     List<Book> books = List();
-    for(int i = 0; i < items.length; i++) {
+    for(int i = 0; i < (items?.length ?? 0); i++) {
       Map item = items[i];
       print(item["volumeInfo"]["title"]);
       try {
