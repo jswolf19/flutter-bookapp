@@ -20,11 +20,13 @@ class _BookPageState extends State<BookPage> {
   void initState() {
     super.initState();
 
-    requestSearchBooks();
+    requestSearchBooks('かがみの孤城').then((x) {
+      setState(() {});
+    });
   }
 
-  void requestSearchBooks() async {
-    final response = await http.get('https://www.googleapis.com/books/v1/volumes/?q=かがみの孤城');
+  Future<void> requestSearchBooks(String title) async {
+    final response = await http.get('https://www.googleapis.com/books/v1/volumes/?q=$title');
     final body = response.body;
     Map result = json.decode(body);
     List items = result["items"];
@@ -43,8 +45,6 @@ class _BookPageState extends State<BookPage> {
         print(error);
       }
     }
-
-    setState(() {});
   }
 
   @override
