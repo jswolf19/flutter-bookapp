@@ -13,6 +13,7 @@ class BookPage extends StatefulWidget {
 }
 
 class _BookPageState extends State<BookPage> {
+  String text = '検索条件を入力してください。';
   List<Book> books = List();
   TextEditingController _controller = TextEditingController();
   FocusNode _focusNode = FocusNode();
@@ -28,7 +29,7 @@ class _BookPageState extends State<BookPage> {
   Widget build(BuildContext context) {
     Widget results;
     if(books.length == 0) {
-      results = Text('loading');
+      results = Text(text);
     } else {
       results = Wrap(
         children: _buildBooks(),
@@ -73,10 +74,19 @@ class _BookPageState extends State<BookPage> {
   void _onPressed() async {
     _focusNode.unfocus();
 
+    setState(() {
+      text = '読み込み中…';
+      books = List();
+    });
+
     GoogleBookConnection conn = GoogleBookConnection();
     List<Book> results = await conn.requestSearchBooks(_controller.text);
     setState(() {
-      books = results;
+      if(results.length > 0) {
+        books = results;
+      } else {
+        text = '条件を満たす結果はありません。';
+      }
     });
   }
 
