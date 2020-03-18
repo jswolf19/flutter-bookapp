@@ -1,7 +1,6 @@
 import 'package:bookapp/calil_connection.dart';
+import 'package:bookapp/google_book_connection.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'book.dart';
 import 'book_card.dart';
 import 'secrets.dart' as secrets;
@@ -20,31 +19,12 @@ class _BookPageState extends State<BookPage> {
   void initState() {
     super.initState();
 
-    requestSearchBooks('かがみの孤城').then((x) {
-      setState(() {});
+    GoogleBookConnection conn = GoogleBookConnection();
+    conn.requestSearchBooks('かがみの孤城').then((results) {
+      setState(() {
+        books = results;
+      });
     });
-  }
-
-  Future<void> requestSearchBooks(String title) async {
-    final response = await http.get('https://www.googleapis.com/books/v1/volumes/?q=$title');
-    final body = response.body;
-    Map result = json.decode(body);
-    List items = result["items"];
-
-    for(int i = 0; i < items.length; i++) {
-      Map item = items[i];
-      print(item["volumeInfo"]["title"]);
-      try {
-        List identifiers = item["volumeInfo"]["industryIdentifiers"];
-        books.add(Book(
-          title: item["volumeInfo"]["title"],
-          imageUrl: item["volumeInfo"]["imageLinks"]["thumbnail"],
-          isbn: identifiers.firstWhere((i) => i["type"] == "ISBN_13")["identifier"]
-        ));
-      } catch(error) {
-        print(error);
-      }
-    }
   }
 
   @override
