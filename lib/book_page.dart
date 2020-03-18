@@ -54,8 +54,13 @@ class _BookPageState extends State<BookPage> {
       body = Text('loading');
     } else {
       body = SingleChildScrollView(
-        child: Wrap(
-            children: _buildBooks(),
+        child: Column(
+          children: <Widget>[
+            _buildTextField(),
+            Wrap(
+                children: _buildBooks(),
+            ),
+          ],
         ),
       );
     }
@@ -65,6 +70,23 @@ class _BookPageState extends State<BookPage> {
         title: Text('Book App'),
       ),
       body: body,
+    );
+  }
+
+  Widget _buildTextField() {
+    return Padding(
+      padding: EdgeInsets.all(16),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: TextField(),
+          ),
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: null,
+          )
+        ],
+      )
     );
   }
 
