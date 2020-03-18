@@ -13,16 +13,27 @@ class GoogleBookConnection {
     List<Book> books = List();
     for(int i = 0; i < (items?.length ?? 0); i++) {
       Map item = items[i];
-      print(item["volumeInfo"]["title"]);
+
+      List identifiers = item["volumeInfo"]["industryIdentifiers"] ?? List();
+      Map identifier = identifiers.firstWhere(
+        (i) => i["type"] == "ISBN_13",
+        orElse: () => null
+      );
+
+      String imageUrl;
       try {
-        List identifiers = item["volumeInfo"]["industryIdentifiers"];
+        imageUrl = item["volumeInfo"]["imageLinks"]["thumbnail"];
+      } catch(error) {
+        print(item);
+        print(error);
+      }
+
+      if(identifier != null) {
         books.add(Book(
             title: item["volumeInfo"]["title"],
-            imageUrl: item["volumeInfo"]["imageLinks"]["thumbnail"],
-            isbn: identifiers.firstWhere((i) => i["type"] == "ISBN_13")["identifier"]
+            imageUrl: imageUrl,
+            isbn: identifier["identifier"]
         ));
-      } catch(error) {
-        print(error);
       }
     }
     return books;
